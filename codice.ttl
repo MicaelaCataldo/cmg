@@ -1,42 +1,37 @@
-@prefix : <http://w3id.org/medred/medred#ns>.
-@prefix medred: <http://w3id.org/medred/medred#ns>.
+@prefix: <http://w3id.org/medred/medred#ns>.
 @prefix schema: <https://schema.org/>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-# Definizione delle classi
-medred:Questionnaire rdf:type rdfs:Class .
-medred:Question rdf:type rdfs:Class .
-medred:Choice rdf:type rdfs:Class .
-medred:Section rdf:type rdfs:Class .
-
-
 # Definizione delle proprietà
 
-medred:isItemofSection rdf:type rdf:Property ;
-                rdfs:subPropertyOf rdf:type ;
-                rdfs:domain :Question ;
-                rdfs:range :Questionnaire .
-
-
-medred:items rdf:type rdf:Property ;
+:items rdf:type rdf:Property ;
                rdfs:subPropertyOf rdf:type ;
-               rdfs:domain :Section ;
-               rdfs:range :Question .
+               rdfs:domain :Questionnaire ;
+               rdfs:range :Section .
 
-medred:hasValue rdf:type rdf:Property ;
+:isItemofSection rdf:type rdf:Property ;
+                rdfs:subPropertyOf rdf:type ;
+                rdfs:domain :Section ;
+                rdfs:range :Question .
+
+# Lista delle possibili risposte
+:hasChoices rdf:type rdf:Property ;
+                    rdfs:subPropertyOf rdf:type ;
+                    rdfs:domain :Question ;
+                    rdfs:range :ChoiceList.
+
+# Risposta inserita dal paziente e memorizzata
+:hasValue rdf:type rdf:Property ;
             rdfs:subPropertyOf rdf:type ;
             rdfs:domain :Question ;
-            rdfs:range [ 
-                rdf:type rdf:Datatype ;
-                rdfs:subClassOf xsd:integer ;
-                xsd:minInclusive "0"^^xsd:integer ;
-                xsd:maxInclusive "3"^^xsd:integer 
-            ] .
+            rdfs:range :Choice .  # da controllare
 
-medred:dataValue rdf:type rdf:Property ;
+:dataValue rdf:type rdf:Property ;
                     rdfs:subPropertyOf rdf:type ;
                     rdfs:domain :Questionnaire ;
                     rdfs:range xsd:date .
+
+# Creazione delle istanze
