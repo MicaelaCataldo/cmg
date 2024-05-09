@@ -1,37 +1,14 @@
-@prefix: <http://w3id.org/medred/medred#ns>.
+@prefix: <http://rdf-vocabulary.ddialliance.org/discovery#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix schema: <https://schema.org/>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-# Definizione delle proprietà
-
-:items rdf:type rdf:Property ;
-               rdfs:subPropertyOf rdf:type ;
-               rdfs:domain :Questionnaire ;
-               rdfs:range :Section .
-
-:isItemofSection rdf:type rdf:Property ;
-                rdfs:subPropertyOf rdf:type ;
-                rdfs:domain :Section ;
-                rdfs:range :Question .
-
-# Lista delle possibili risposte
-:hasChoices rdf:type rdf:Property ;
-                    rdfs:subPropertyOf rdf:type ;
-                    rdfs:domain :Question ;
-                    rdfs:range :ChoiceList.
-
-# Risposta inserita dal paziente e memorizzata
-:hasValue rdf:type rdf:Property ;
-            rdfs:subPropertyOf rdf:type ;
-            rdfs:domain :Question ;
-            rdfs:range :Choice .  # da controllare
-
-:dataValue rdf:type rdf:Property ;
-                    rdfs:subPropertyOf rdf:type ;
-                    rdfs:domain :Questionnaire ;
-                    rdfs:range xsd:date .
-
 # Creazione delle istanze
+:Questionnaire_1 rdf:type :Questionnaire .
+:Question_1 rdf:Type :Question .
+:Question_1 :question :Questionnaire_1 .
+# << :Question_1 :question :Questionnaire_1 >> skos:notation "Reflux"  .
+:Representation_1 rdf:type :Representation .
+:Question_1 :responseDomain :Representation_1 .
